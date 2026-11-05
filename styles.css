@@ -1,0 +1,1056 @@
+:root {
+  --bg-canvas: #f5f5f7;
+  --bg-elevated: #ffffff;
+  --bg-dark-card: #000000;
+  --bg-subtle: #ebebf0;
+  --nav-glass: rgba(255, 255, 255, 0.82);
+  --nav-border: rgba(0, 0, 0, 0.08);
+  --ink-primary: #1d1d1f;
+  --ink-secondary: #6e6e73;
+  --ink-muted: #86868b;
+  --ink-on-dark: #f5f5f7;
+  --ink-muted-on-dark: #a1a1a6;
+  --apple-blue: #0066cc;
+  --apple-blue-hover: #0071e3;
+  --accent-orange-dark: #f56300;
+  --accent-orange-light: #b64400;
+  --status-green: #28cd41;
+  --status-amber: #ff9500;
+  --status-red: #ff3b30;
+  --radius-card: 28px;
+  --radius-inner: 18px;
+  --radius-pill: 9999px;
+  --shadow-shelf: 2px 4px 16px rgba(0, 0, 0, 0.06);
+  --shadow-shelf-hover: 2px 12px 32px rgba(0, 0, 0, 0.14);
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+[data-theme="dark"] {
+  --bg-canvas: #000000;
+  --bg-elevated: #161617;
+  --bg-dark-card: #1d1d1f;
+  --bg-subtle: #242426;
+  --nav-glass: rgba(22, 22, 23, 0.82);
+  --nav-border: rgba(255, 255, 255, 0.1);
+  --ink-primary: #f5f5f7;
+  --ink-secondary: #a1a1a6;
+  --ink-muted: #86868b;
+  --apple-blue: #2997ff;
+  --apple-blue-hover: #47a9ff;
+  --accent-orange-light: #ff7a1a;
+  --shadow-shelf: 0 8px 28px rgba(0, 0, 0, 0.45);
+  --shadow-shelf-hover: 0 14px 40px rgba(0, 0, 0, 0.65);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+::selection {
+  background: rgba(0, 102, 204, 0.18);
+  color: var(--ink-primary);
+}
+
+html {
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  background-color: var(--bg-canvas);
+  color: var(--ink-primary);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-optical-sizing: auto;
+}
+
+body {
+  background-color: var(--bg-canvas);
+  color: var(--ink-primary);
+  line-height: 1.5;
+  overflow-x: hidden;
+  transition: background-color 240ms var(--ease-out-strong), color 240ms var(--ease-out-strong);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(134, 134, 139, 0.35);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(134, 134, 139, 0.6);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 1. Apple Global Navigation Bar */
+.global-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 44px;
+  background: var(--nav-glass);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--nav-border);
+}
+
+.global-nav-inner {
+  max-width: 1120px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.nav-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-primary);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  cursor: pointer;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  list-style: none;
+}
+
+.nav-links button {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-primary);
+  opacity: 0.8;
+  cursor: pointer;
+  padding: 4px 2px;
+  transition: opacity 160ms var(--ease-out-strong), transform 140ms var(--ease-out-strong);
+}
+
+.nav-links button:hover,
+.nav-links button.active {
+  opacity: 1;
+}
+
+.nav-links button.active {
+  font-weight: 700;
+  color: var(--apple-blue);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-icon-btn {
+  background: transparent;
+  border: 1px solid var(--nav-border);
+  color: var(--ink-primary);
+  height: 28px;
+  padding: 0 10px;
+  border-radius: var(--radius-pill);
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: transform 150ms var(--ease-out-strong), background-color 150ms var(--ease-out-strong);
+}
+
+.nav-icon-btn:hover {
+  background: var(--bg-subtle);
+}
+
+.nav-icon-btn:active {
+  transform: scale(0.96);
+}
+
+/* 2. Top Notification Ribbon (Apple Store Banner Style) */
+.store-ribbon {
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--nav-border);
+  padding: 11px 20px;
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--ink-primary);
+}
+
+.store-ribbon-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ribbon-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 9px;
+  border-radius: var(--radius-pill);
+  background: rgba(40, 205, 65, 0.14);
+  color: #168829;
+  font-weight: 700;
+  font-size: 11px;
+}
+
+[data-theme="dark"] .ribbon-badge {
+  color: #32d74b;
+}
+
+.apple-link {
+  color: var(--apple-blue);
+  text-decoration: none;
+  font-weight: 600;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.apple-link:hover {
+  text-decoration: underline;
+}
+
+/* 3. Main Store Container */
+.store-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px 96px;
+}
+
+/* 4. Store Hero Split Header (Exact Apple Store Layout) */
+.store-hero {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 56px 0 40px;
+  flex-wrap: wrap;
+}
+
+.store-hero-left {
+  max-width: 720px;
+}
+
+.store-hero-title {
+  font-size: clamp(2.5rem, 4.5vw, 3.35rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+  color: var(--ink-primary);
+}
+
+.store-hero-title .sub-tone {
+  color: var(--ink-secondary);
+}
+
+.store-hero-room-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 6px 14px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-secondary);
+}
+
+.store-hero-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  gap: 10px;
+}
+
+.store-hero-tagline {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.32;
+  color: var(--ink-primary);
+}
+
+.store-hero-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  font-size: 13.5px;
+}
+
+/* 5. Apple Product Category Dock */
+.category-dock {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 16px 4px 44px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.category-dock::-webkit-scrollbar {
+  display: none;
+}
+
+.dock-item {
+  flex: 0 0 auto;
+  width: 118px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--ink-primary);
+  padding: 10px 6px;
+  border-radius: 20px;
+  transition: transform 200ms var(--ease-out-strong), background-color 200ms var(--ease-out-strong);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .dock-item:hover {
+    transform: translateY(-4px);
+    background: rgba(0, 0, 0, 0.03);
+  }
+  [data-theme="dark"] .dock-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.dock-item:active {
+  transform: scale(0.96);
+}
+
+.dock-item.active .dock-label {
+  color: var(--apple-blue);
+  font-weight: 700;
+}
+
+.dock-icon-stage {
+  width: 88px;
+  height: 68px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 200ms var(--ease-out-strong);
+}
+
+.dock-item.active .dock-icon-stage {
+  outline: 2px solid var(--apple-blue);
+  outline-offset: 3px;
+}
+
+.dock-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  padding: 2px 6px;
+  border-radius: var(--radius-pill);
+  font-size: 10px;
+  font-weight: 700;
+  color: #ffffff;
+  background: var(--accent-orange-dark);
+}
+
+.dock-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink-primary);
+  text-align: center;
+}
+
+/* 6. Two-Tone Section Headings (Apple Store Signature) */
+.section-block {
+  margin-top: 52px;
+}
+
+.section-header-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+
+.two-tone-heading {
+  font-size: clamp(1.45rem, 2.3vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  color: var(--ink-primary);
+}
+
+.two-tone-heading span {
+  color: var(--ink-secondary);
+}
+
+/* 7. Apple Store Shelf Cards (Alternating Pitch-Black & Pure-White 28px Cards) */
+.shelf-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(280px, 1fr));
+  gap: 20px;
+  overflow-x: auto;
+  padding: 6px 2px 18px;
+}
+
+.shelf-card {
+  border-radius: var(--radius-card);
+  padding: 28px 26px 24px;
+  min-height: 470px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-shelf);
+  position: relative;
+  overflow: hidden;
+  transition: transform 260ms var(--ease-out-strong), box-shadow 260ms var(--ease-out-strong);
+  cursor: pointer;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .shelf-card:hover {
+    transform: scale(1.014);
+    box-shadow: var(--shadow-shelf-hover);
+  }
+}
+
+.shelf-card:active {
+  transform: scale(0.99);
+}
+
+.shelf-card.dark-card {
+  background: #000000;
+  color: #f5f5f7;
+}
+
+.shelf-card.light-card {
+  background: #ffffff;
+  color: #1d1d1f;
+}
+
+[data-theme="dark"] .shelf-card.light-card {
+  background: #1c1c1e;
+  color: #f5f5f7;
+}
+
+.shelf-status-tag {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+
+.shelf-card.dark-card .shelf-status-tag {
+  color: #f56300;
+}
+
+.shelf-card.light-card .shelf-status-tag {
+  color: #b64400;
+}
+
+[data-theme="dark"] .shelf-card.light-card .shelf-status-tag {
+  color: #ff8533;
+}
+
+.shelf-card-title {
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.18;
+  margin-bottom: 8px;
+}
+
+.shelf-card-desc {
+  font-size: 13.5px;
+  line-height: 1.45;
+  margin-bottom: 10px;
+  opacity: 0.86;
+}
+
+.shelf-card-metric {
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.95;
+}
+
+.shelf-visual-box {
+  margin-top: 20px;
+  border-radius: var(--radius-inner);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.shelf-card.dark-card .shelf-visual-box {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.shelf-card.light-card .shelf-visual-box {
+  background: #f5f5f7;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="dark"] .shelf-card.light-card .shelf-visual-box {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 8. Stage Lock Bar (Problem #7 Solver: Prevent Last-Minute Hijacking) */
+.stage-lock-banner {
+  background: var(--bg-elevated);
+  border-radius: var(--radius-card);
+  padding: 24px 28px;
+  box-shadow: var(--shadow-shelf);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.stage-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.stage-step-card {
+  padding: 16px;
+  border-radius: var(--radius-inner);
+  background: var(--bg-canvas);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  transition: transform 160ms var(--ease-out-strong);
+}
+
+.stage-step-card.locked {
+  background: rgba(0, 102, 204, 0.07);
+  border: 1px solid rgba(0, 102, 204, 0.22);
+}
+
+.stage-step-card.active-stage {
+  background: rgba(245, 99, 0, 0.09);
+  border: 1px solid rgba(245, 99, 0, 0.35);
+}
+
+/* 9. Interactive Workspace Panels */
+.workspace-panel {
+  background: var(--bg-elevated);
+  border-radius: var(--radius-card);
+  padding: 32px;
+  box-shadow: var(--shadow-shelf);
+}
+
+.workspace-grid-2 {
+  display: grid;
+  grid-template-columns: 1.05fr 1.35fr;
+  gap: 24px;
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--apple-blue);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 10px 20px;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  transition: background-color 160ms var(--ease-out-strong), transform 140ms var(--ease-out-strong);
+}
+
+.btn-primary:hover {
+  background: var(--apple-blue-hover);
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+.btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-dark {
+  background: #1d1d1f;
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 10px 18px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform 140ms var(--ease-out-strong), opacity 140ms var(--ease-out-strong);
+}
+
+[data-theme="dark"] .btn-dark {
+  background: #f5f5f7;
+  color: #1d1d1f;
+}
+
+.btn-dark:active {
+  transform: scale(0.97);
+}
+
+.btn-secondary {
+  background: var(--bg-subtle);
+  color: var(--ink-primary);
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 9px 16px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform 140ms var(--ease-out-strong), background-color 160ms var(--ease-out-strong);
+}
+
+.btn-secondary:active {
+  transform: scale(0.97);
+}
+
+/* Workload & Member Cards */
+.member-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.member-row {
+  padding: 16px 18px;
+  border-radius: var(--radius-inner);
+  background: var(--bg-canvas);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.member-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.member-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  color: #ffffff;
+}
+
+.load-bar-track {
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--bg-subtle);
+  overflow: hidden;
+}
+
+.load-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 300ms var(--ease-out-strong);
+}
+
+.imbalance-alert {
+  padding: 14px 18px;
+  border-radius: var(--radius-inner);
+  background: rgba(255, 59, 48, 0.1);
+  border: 1px solid rgba(255, 59, 48, 0.28);
+  color: var(--ink-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+/* Task & Checkpoint Cards */
+.task-card {
+  padding: 16px 18px;
+  border-radius: var(--radius-inner);
+  background: var(--bg-canvas);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+/* Resource Archive & Inline Comments */
+.filter-pills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-pill {
+  padding: 7px 15px;
+  border-radius: var(--radius-pill);
+  border: none;
+  background: var(--bg-subtle);
+  color: var(--ink-secondary);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 150ms var(--ease-out-strong), color 150ms var(--ease-out-strong), transform 140ms var(--ease-out-strong);
+}
+
+.filter-pill.active {
+  background: var(--ink-primary);
+  color: var(--bg-elevated);
+}
+
+.filter-pill:active {
+  transform: scale(0.96);
+}
+
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.resource-card {
+  background: var(--bg-elevated);
+  border-radius: var(--radius-card);
+  padding: 24px;
+  box-shadow: var(--shadow-shelf);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.comment-thread {
+  border-top: 1px solid var(--nav-border);
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.comment-item {
+  padding: 11px 14px;
+  border-radius: 14px;
+  background: var(--bg-canvas);
+  font-size: 13px;
+}
+
+.comment-alternative-box {
+  margin-top: 6px;
+  padding: 8px 11px;
+  border-radius: 10px;
+  background: rgba(0, 102, 204, 0.09);
+  color: var(--ink-primary);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+/* Inputs & Forms */
+.apple-input,
+.apple-select,
+.apple-textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--nav-border);
+  background: var(--bg-canvas);
+  color: var(--ink-primary);
+  font-family: inherit;
+  font-size: 13.5px;
+  outline: none;
+  transition: border-color 150ms var(--ease-out-strong), box-shadow 150ms var(--ease-out-strong);
+}
+
+.apple-input:focus,
+.apple-select:focus,
+.apple-textarea:focus {
+  border-color: var(--apple-blue);
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.18);
+}
+
+/* Interactive Mind Map (Idea Map) */
+.mindmap-stage {
+  position: relative;
+  width: 100%;
+  height: 540px;
+  background: #09090b;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-shelf);
+  user-select: none;
+}
+
+.mindmap-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.mindmap-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  min-width: 190px;
+  max-width: 245px;
+  padding: 14px 16px;
+  border-radius: 20px;
+  background: rgba(28, 28, 30, 0.92);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #f5f5f7;
+  cursor: grab;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+  transition: box-shadow 160ms var(--ease-out-strong), border-color 160ms var(--ease-out-strong);
+}
+
+.mindmap-node:active {
+  cursor: grabbing;
+}
+
+.mindmap-node.root-node {
+  background: #0066cc;
+  border-color: rgba(255, 255, 255, 0.35);
+  min-width: 220px;
+  text-align: center;
+}
+
+.mindmap-node.selected-node {
+  border: 2px solid #f56300;
+  box-shadow: 0 0 0 4px rgba(245, 99, 0, 0.25), 0 12px 32px rgba(0, 0, 0, 0.55);
+}
+
+.mindmap-node.adopted-node {
+  border: 2px solid #28cd41;
+}
+
+/* Voice Recording Studio */
+.voice-studio-card {
+  background: #000000;
+  color: #f5f5f7;
+  border-radius: var(--radius-card);
+  padding: 32px;
+  box-shadow: var(--shadow-shelf);
+}
+
+.waveform-bars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  height: 48px;
+}
+
+.wave-bar {
+  width: 5px;
+  height: 12px;
+  border-radius: 99px;
+  background: #f56300;
+  transition: height 120ms ease-out;
+}
+
+.recording-active .wave-bar {
+  background: #ff3b30;
+}
+
+/* Modal Scrim */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.48);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-sheet {
+  width: 100%;
+  max-width: 520px;
+  background: var(--bg-elevated);
+  color: var(--ink-primary);
+  border-radius: var(--radius-card);
+  padding: 30px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+  animation: modalEnter 220ms var(--ease-out-strong);
+}
+
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Toast Notification */
+.apple-toast {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 300;
+  background: rgba(29, 29, 31, 0.94);
+  color: #ffffff;
+  backdrop-filter: blur(16px);
+  padding: 13px 20px;
+  border-radius: var(--radius-pill);
+  font-size: 13.5px;
+  font-weight: 600;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: transform 220ms var(--ease-out-strong), opacity 220ms var(--ease-out-strong);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1080px) {
+  .shelf-grid {
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+  }
+  .workspace-grid-2 {
+    grid-template-columns: 1fr;
+  }
+  .stage-steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .store-container {
+    padding: 0 16px 72px;
+  }
+  .nav-links {
+    display: none;
+  }
+  .store-hero {
+    padding: 32px 0 24px;
+  }
+  .store-hero-right {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .store-hero-links {
+    align-items: flex-start;
+  }
+  .shelf-grid {
+    grid-template-columns: 1fr;
+  }
+  .stage-steps-grid {
+    grid-template-columns: 1fr;
+  }
+  .resource-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Print Style for Professor Peer-Review Report */
+@media print {
+  .global-nav,
+  .store-ribbon,
+  .category-dock,
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
